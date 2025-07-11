@@ -312,30 +312,30 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🤖 AI Interview Prep Bot - Expanded Edition</h1>
+            <h1>AI Interview Prep Bot </h1>
             <p>Master DSA Concepts: Arrays, Strings, Sorting, Trees, Graphs, Queues, LinkedLists & More!</p>
         </div>
         
         <div class="main-content">
             <div class="menu">
                 <div class="menu-item active" onclick="showSection('home')">
-                    🏠 Home
+                     Home
                 </div>
                 <div class="menu-item" onclick="showSection('practice')">
-                    📝 Practice Questions
+                    Practice Questions
                 </div>
                 <div class="menu-item" onclick="showSection('progress')">
-                    📊 My Progress
+                    My Progress
                 </div>
                 <div class="menu-item" onclick="showSection('chat')">
-                    💬 Chat Helper
+                    Chat Helper
                 </div>
             </div>
             
             <div class="content-area">
                 <!-- Home Section -->
                 <div id="home-section">
-                    <h2>Welcome to Comprehensive DSA Learning! 🎯</h2>
+                    <h2>Welcome to Comprehensive DSA Learning!</h2>
                     <p>Start your journey with essential Data Structures and Algorithms concepts covering all major topics!</p>
                     
                     <div class="stats">
@@ -358,14 +358,14 @@
                     </div>
                     
                     <div style="text-align: center; margin-top: 20px;">
-                        <button class="button" onclick="getRandomQuestion()">🎲 Random Question</button>
-                        <button class="button" onclick="showSection('practice')">📚 Browse Questions</button>
+                        <button class="button" onclick="getRandomQuestion()">Random Question</button>
+                        <button class="button" onclick="showSection('practice')">Browse Questions</button>
                     </div>
                 </div>
                 
                 <!-- Practice Section -->
                 <div id="practice-section" class="hidden">
-                    <h2>📝 Practice Questions</h2>
+                    <h2>Practice Questions</h2>
                     
                     <div style="margin-bottom: 20px;">
                         <button class="button" onclick="filterQuestions('all')">All Questions</button>
@@ -374,19 +374,19 @@
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <button class="button-secondary" onclick="filterQuestions('Array')">📊 Array</button>
-                        <button class="button-secondary" onclick="filterQuestions('String')">📝 String</button>
-                        <button class="button-secondary" onclick="filterQuestions('Search')">🔍 Search</button>
-                        <button class="button-secondary" onclick="filterQuestions('Sorting')">🔄 Sorting</button>
-                        <button class="button-secondary" onclick="filterQuestions('Stack')">📚 Stack</button>
+                        <button class="button-secondary" onclick="filterQuestions('Array')">Array</button>
+                        <button class="button-secondary" onclick="filterQuestions('String')">String</button>
+                        <button class="button-secondary" onclick="filterQuestions('Search')">Search</button>
+                        <button class="button-secondary" onclick="filterQuestions('Sorting')">Sorting</button>
+                        <button class="button-secondary" onclick="filterQuestions('Stack')">Stack</button>
                     </div>
                     
                     <div style="margin-bottom: 20px;">
-                        <button class="button-secondary" onclick="filterQuestions('Queue')">🚢 Queue</button>
-                        <button class="button-secondary" onclick="filterQuestions('Tree')">🌳 Tree</button>
-                        <button class="button-secondary" onclick="filterQuestions('Graph')">🕸️ Graph</button>
-                        <button class="button-secondary" onclick="filterQuestions('LinkedList')">🔗 LinkedList</button>
-                        <button class="button-secondary" onclick="filterQuestions('Math')">🔢 Math</button>
+                        <button class="button-secondary" onclick="filterQuestions('Queue')">Queue</button>
+                        <button class="button-secondary" onclick="filterQuestions('Tree')">Tree</button>
+                        <button class="button-secondary" onclick="filterQuestions('Graph')">Graph</button>
+                        <button class="button-secondary" onclick="filterQuestions('LinkedList')">LinkedList</button>
+                        <button class="button-secondary" onclick="filterQuestions('Math')">Math</button>
                     </div>
                     
                     <div id="questions-list">
@@ -396,7 +396,7 @@
                 
                 <!-- Progress Section -->
                 <div id="progress-section" class="hidden">
-                    <h2>📊 My Progress</h2>
+                    <h2>My Progress</h2>
                     
                     <div class="stats">
                         <div class="stat-card">
@@ -414,29 +414,34 @@
                     </div>
                     
                     <div class="question-card">
-                        <h3>📚 Study Tips</h3>
+                        <h3>Study Tips</h3>
                         <ul class="tips-list">
-                            <li>🎯 Start with Easy questions to build confidence</li>
-                            <li>📖 Practice one category at a time</li>
-                            <li>💡 Always try to solve before looking at hints</li>
-                            <li>⏰ Set a daily goal (like 1 question per day)</li>
-                            <li>🔄 Review your solved questions weekly</li>
+                            <li>Start with Easy questions to build confidence</li>
+                            <li>Practice one category at a time</li>
+                            <li>Always try to solve before looking at hints</li>
+                            <li>Set a daily goal (like 1 question per day)</li>
+                            <li>Review your solved questions weekly</li>
                         </ul>
                     </div>
                     
                     <div style="text-align: center;">
-                        <button class="button" onclick="exportProgress()">📤 Export Progress</button>
-                        <button class="button-secondary" onclick="resetProgress()">🔄 Reset Progress</button>
+                        <button class="button" onclick="exportProgress()">Export Progress</button>
+                        <button class="button-secondary" onclick="resetProgress()">Reset Progress</button>
                     </div>
                 </div>
                 
                 <!-- Chat Section -->
                 <div id="chat-section" class="hidden">
-                    <h2>💬 Chat Helper</h2>
+                    <h2>Chat Helper</h2>
+                    <p style="font-size: 14px; color: #666; margin: 10px 0; padding: 10px; background: #f0f8ff; border-radius: 5px;">
+                        <strong>AI-Powered Chat:</strong> This chatbot can provide intelligent responses about DSA topics! 
+                        To enable AI responses, add your Gemini API key in the code (line ~1427). 
+                        Without the API key, it will use basic fallback responses.
+                    </p>
                     
                     <div class="chat-area" id="chat-messages">
                         <div class="chat-message chat-bot">
-                            <strong>🤖 Bot:</strong> Hi! I'm here to help you learn DSA. Ask me about any topic or request a specific type of question!
+                            <strong>Bot:</strong> Hi! I'm here to help you learn DSA. Ask me about any topic or request a specific type of question!
                         </div>
                     </div>
                     
@@ -1221,17 +1226,17 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             const isSolved = userProgress.solvedIds.includes(question.id);
             
             card.innerHTML = `
-                <div class="question-title">${question.title} ${isSolved ? '✅' : ''}</div>
+                <div class="question-title">${question.title} ${isSolved ? '[SOLVED]' : ''}</div>
                 <div class="question-meta">
                     <span class="tag ${difficultyClass}">${question.difficulty}</span>
                     <span class="tag category-tag">${question.category}</span>
                 </div>
                 <div style="margin-bottom: 15px; color: #636e72;">${question.description}</div>
                 <div>
-                    <button class="button" onclick="viewQuestion(${question.id})">👁️ View</button>
-                    <button class="button" onclick="showHint(${question.id})">💡 Hint</button>
-                    <button class="button" onclick="showSolution(${question.id})">� Code Solution</button>
-                    <button class="button" onclick="markSolved(${question.id})">✅ Mark Solved</button>
+                    <button class="button" onclick="viewQuestion(${question.id})">View</button>
+                    <button class="button" onclick="showHint(${question.id})">Hint</button>
+                    <button class="button" onclick="showSolution(${question.id})">Code Solution</button>
+                    <button class="button" onclick="markSolved(${question.id})">Mark Solved</button>
                 </div>
             `;
             
@@ -1266,7 +1271,7 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             const question = questions.find(q => q.id === id);
             if (!question) return;
             
-            alert(`📝 ${question.title}\n\n${question.description}\n\nDifficulty: ${question.difficulty}\nCategory: ${question.category}`);
+            alert(`${question.title}\n\n${question.description}\n\nDifficulty: ${question.difficulty}\nCategory: ${question.category}`);
         }
 
         // Show hint
@@ -1274,7 +1279,7 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             const question = questions.find(q => q.id === id);
             if (!question) return;
             
-            alert(`💡 Hint for "${question.title}":\n\n${question.hint}`);
+            alert(`Hint for "${question.title}":\n\n${question.hint}`);
         }
 
         // Show solution
@@ -1300,7 +1305,7 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             
             if (question.code) {
                 content += `
-                    <h3>💻 Code Implementation:</h3>
+                    <h3>Code Implementation:</h3>
                     <div class="code-block">
                         <pre>${question.code}</pre>
                     </div>
@@ -1310,7 +1315,7 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             // Add complexity analysis for some algorithms
             if (question.category === 'Sorting') {
                 content += `
-                    <h3>⚡ Complexity Analysis:</h3>
+                    <h3>Complexity Analysis:</h3>
                     <p><strong>Time Complexity:</strong> ${getTimeComplexity(question.title)}</p>
                     <p><strong>Space Complexity:</strong> ${getSpaceComplexity(question.title)}</p>
                 `;
@@ -1381,10 +1386,10 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
                 
                 // Show encouragement
                 const messages = [
-                    "🎉 Great job! Keep going!",
-                    "💪 You're getting stronger!",
-                    "⭐ Excellent progress!",
-                    "🚀 You're on fire!"
+                    "Great job! Keep going!",
+                    "You're getting stronger!",
+                    "Excellent progress!",
+                    "You're on fire!"
                 ];
                 
                 const randomMessage = messages[Math.floor(Math.random() * messages.length)];
@@ -1423,6 +1428,10 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             }
         }
 
+        // Gemini API Configuration
+        const GEMINI_API_KEY = 'AIzaSyC4-xG9NK3VjeR1J9DEci611T-nm90OMyA'; // Replace with your actual API key
+        const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
         // Chat functionality
         function handleChatInput(event) {
             if (event.key === 'Enter') {
@@ -1430,7 +1439,7 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             }
         }
 
-        function sendChatMessage() {
+        async function sendChatMessage() {
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             
@@ -1440,11 +1449,81 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             addChatMessage('user', message);
             input.value = '';
             
-            // Generate bot response
-            setTimeout(() => {
-                const response = generateBotResponse(message);
+            try {
+                // Try to get response from Gemini API
+                const response = await getGeminiResponse(message);
                 addChatMessage('bot', response);
-            }, 500);
+            } catch (error) {
+                console.error('Error:', error);
+                
+                // Fallback to simple response
+                const fallbackResponse = generateBotResponse(message);
+                addChatMessage('bot', fallbackResponse);
+            }
+        }
+
+        async function getGeminiResponse(userMessage) {
+            // Enhanced prompt for DSA learning context
+            const prompt = `You are an AI assistant specializing in Data Structures and Algorithms (DSA) interview preparation. 
+            
+            Context: You're helping a student learn DSA concepts including arrays, strings, searching, sorting, trees, graphs, queues, linked lists, stacks, and math problems.
+            
+            Available topics and questions in our system:
+            - Arrays: Find Maximum/Minimum, Sum Elements, Two Sum, Remove Duplicates
+            - Strings: Count Vowels, Reverse String, Palindrome Check, Anagram Check
+            - Searching: Linear Search, Binary Search
+            - Sorting: Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort
+            - Trees: Binary Tree Traversal, BST Insert, Find Maximum in Tree
+            - Graphs: BFS/DFS Traversal, Graph Representation
+            - Queues: Queue Implementation, Circular Queue
+            - Linked Lists: Insert/Delete, Reverse List, Find Middle, Detect Cycle
+            - Stacks: Balanced Parentheses, Valid Parentheses
+            - Math: Fibonacci, Prime Numbers, GCD
+
+            User question: "${userMessage}"
+
+            Please provide a helpful, encouraging response that:
+            1. Directly addresses their question
+            2. Suggests specific practice problems from our available topics
+            3. Gives practical coding tips or explanations
+            4. Keeps the tone friendly and motivating
+            5. Limits response to 2-3 sentences for better readability
+
+            If they ask for code examples, provide clean, commented C++ code snippets.`;
+
+            const requestBody = {
+                contents: [{
+                    parts: [{
+                        text: prompt
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 500,
+                }
+            };
+
+            const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                return data.candidates[0].content.parts[0].text;
+            } else {
+                throw new Error('No response from Gemini API');
+            }
         }
 
         function addChatMessage(sender, message) {
@@ -1452,13 +1531,14 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `chat-message chat-${sender}`;
             
-            const senderLabel = sender === 'bot' ? '🤖 Bot:' : '👤 You:';
+            const senderLabel = sender === 'bot' ? 'Bot:' : 'You:';
             messageDiv.innerHTML = `<strong>${senderLabel}</strong> ${message}`;
             
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
+        // Fallback response system when API is unavailable
         function generateBotResponse(message) {
             const lowerMessage = message.toLowerCase();
             
@@ -1485,7 +1565,7 @@ vector<int> twoSumOptimal(vector<int>& nums, int target) {
             } else if (lowerMessage.includes('help')) {
                 return "I can help you with DSA topics! Ask me about arrays, strings, searching, sorting, trees, graphs, queues, linked lists, stacks, or math!";
             } else if (lowerMessage.includes('progress')) {
-                return `You've solved ${userProgress.solvedQuestions}/${userProgress.totalQuestions} questions! Your streak is ${userProgress.currentStreak}. Keep going! 🚀`;
+                return `You've solved ${userProgress.solvedQuestions}/${userProgress.totalQuestions} questions! Your streak is ${userProgress.currentStreak}. Keep going!`;
             } else if (lowerMessage.includes('easy')) {
                 return "Easy questions are perfect to start! Try: Find Maximum, Count Vowels, Linear Search, Insert Node, or Prime Check. Build confidence first!";
             } else if (lowerMessage.includes('medium')) {

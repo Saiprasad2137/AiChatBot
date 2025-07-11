@@ -324,25 +324,25 @@ public:
     
     void displayWelcome() {
         cout << "\n" << string(60, '=') << endl;
-        cout << "🤖 SIMPLE AI INTERVIEW PREP BOT - EXPANDED EDITION" << endl;
+        cout << "SIMPLE AI INTERVIEW PREP BOT - EXPANDED EDITION" << endl;
         cout << string(60, '=') << endl;
         cout << "Welcome! Let's practice DSA concepts!" << endl;
-        cout << "📚 Topics: Arrays, Strings, Sorting, Trees, Graphs, Queues, LinkedLists & More!" << endl;
+        cout << "Topics: Arrays, Strings, Sorting, Trees, Graphs, Queues, LinkedLists & More!" << endl;
         cout << "Questions available: " << questions.size() << endl;
         cout << "Your progress: " << progress.solvedQuestions << "/" << progress.totalQuestions << endl;
         cout << string(60, '=') << endl;
     }
     
     void displayMenu() {
-        cout << "\n📚 What would you like to do?" << endl;
-        cout << "1. 🎲 Practice Random Question" << endl;
-        cout << "2. 📊 Practice by Difficulty (Easy/Medium)" << endl;
-        cout << "3. 🏷️  Practice by Category" << endl;
-        cout << "4. 📈 View My Progress" << endl;
-        cout << "5. 💡 Get Study Tips" << endl;
-        cout << "6. 🎯 Quick Quiz (3 questions)" << endl;
-        cout << "7. 📤 Save Progress" << endl;
-        cout << "8. 🚪 Exit" << endl;
+        cout << "\nWhat would you like to do?" << endl;
+        cout << "1. Practice Random Question" << endl;
+        cout << "2. Practice by Difficulty (Easy/Medium)" << endl;
+        cout << "3. Practice by Category" << endl;
+        cout << "4. View My Progress" << endl;
+        cout << "5. Get Study Tips" << endl;
+        cout << "6. Quick Quiz (3 questions)" << endl;
+        cout << "7. Save Progress" << endl;
+        cout << "8. Exit" << endl;
         cout << "\nEnter your choice (1-8): ";
     }
     
@@ -361,9 +361,9 @@ public:
     }
     
     void practiceByDifficulty() {
-        cout << "\n📊 Choose difficulty:" << endl;
-        cout << "1. 🟢 Easy" << endl;
-        cout << "2. 🟡 Medium" << endl;
+        cout << "\nChoose difficulty:" << endl;
+        cout << "1. Easy" << endl;
+        cout << "2. Medium" << endl;
         cout << "Enter choice (1-2): ";
         
         int choice;
@@ -400,7 +400,7 @@ public:
     }
     
     void practiceByCategory() {
-        cout << "\n🏷️ Choose category:" << endl;
+        cout << "\nChoose category:" << endl;
         cout << "1. Array" << endl;
         cout << "2. String" << endl;
         cout << "3. Search" << endl;
@@ -455,7 +455,7 @@ public:
     
     void displayQuestion(const Question& q) {
         cout << "\n" << string(40, '-') << endl;
-        cout << "📝 QUESTION #" << q.id << endl;
+        cout << "QUESTION #" << q.id << endl;
         cout << string(40, '-') << endl;
         cout << "Title: " << q.title << endl;
         cout << "Difficulty: " << q.difficulty << endl;
@@ -466,10 +466,10 @@ public:
     
     void handleQuestionActions(const Question& q) {
         cout << "\nWhat would you like to do?" << endl;
-        cout << "1. 💡 Show Hint" << endl;
-        cout << "2. 📖 Show Solution" << endl;
-        cout << "3. ✅ Mark as Solved" << endl;
-        cout << "4. ⏭️ Skip" << endl;
+        cout << "1. Show Hint" << endl;
+        cout << "2. Show Solution" << endl;
+        cout << "3. Mark as Solved" << endl;
+        cout << "4. Skip" << endl;
         cout << "Enter choice (1-4): ";
         
         int choice;
@@ -477,10 +477,10 @@ public:
         
         switch (choice) {
             case 1:
-                cout << "\n💡 HINT: " << q.hint << endl;
+                cout << "\nHINT: " << q.hint << endl;
                 break;
             case 2:
-                cout << "\n📖 SOLUTION: " << q.solution << endl;
+                cout << "\nSOLUTION: " << q.solution << endl;
                 break;
             case 3:
                 markAsSolved(q);
@@ -498,22 +498,22 @@ public:
         progress.currentStreak++;
         progress.categoryCount[q.category]++;
         
-        cout << "\n🎉 Great job! Question marked as solved!" << endl;
-        cout << "💪 Questions solved: " << progress.solvedQuestions << "/" << progress.totalQuestions << endl;
-        cout << "🔥 Current streak: " << progress.currentStreak << endl;
+        cout << "\nGreat job! Question marked as solved!" << endl;
+        cout << "Questions solved: " << progress.solvedQuestions << "/" << progress.totalQuestions << endl;
+        cout << "Current streak: " << progress.currentStreak << endl;
         
         // Simple encouragement
         if (progress.solvedQuestions == 1) {
-            cout << "🎯 You've solved your first question! Keep going!" << endl;
+            cout << "You've solved your first question! Keep going!" << endl;
         } else if (progress.solvedQuestions == 5) {
-            cout << "⭐ Awesome! You've solved 5 questions!" << endl;
+            cout << "Awesome! You've solved 5 questions!" << endl;
         } else if (progress.solvedQuestions == 10) {
-            cout << "🏆 Excellent! You're making great progress!" << endl;
+            cout << "Excellent! You're making great progress!" << endl;
         }
     }
     
     void viewProgress() {
-        cout << "\n📈 YOUR PROGRESS" << endl;
+        cout << "\nYOUR PROGRESS" << endl;
         cout << string(30, '=') << endl;
         cout << "Total Questions: " << progress.totalQuestions << endl;
         cout << "Solved Questions: " << progress.solvedQuestions << endl;
@@ -543,17 +543,17 @@ public:
     
     void showStudyTips() {
         vector<string> tips = {
-            "💡 Start with Easy questions to build confidence",
-            "📚 Practice one category at a time (like Arrays first)",
-            "🎯 Always try to solve before looking at hints",
-            "⏰ Set a daily goal (like 1 question per day)",
-            "🔄 Review your solved questions weekly",
-            "💪 Don't give up if you can't solve immediately",
-            "📝 Write down the logic before coding",
-            "🧪 Test your solution with different inputs"
+            "Start with Easy questions to build confidence",
+            "Practice one category at a time (like Arrays first)",
+            "Always try to solve before looking at hints",
+            "Set a daily goal (like 1 question per day)",
+            "Review your solved questions weekly",
+            "Don't give up if you can't solve immediately",
+            "Write down the logic before coding",
+            "Test your solution with different inputs"
         };
         
-        cout << "\n💡 STUDY TIPS" << endl;
+        cout << "\nSTUDY TIPS" << endl;
         cout << string(20, '=') << endl;
         
         // Show random tips
@@ -564,7 +564,7 @@ public:
     }
     
     void quickQuiz() {
-        cout << "\n🎯 QUICK QUIZ - 3 Questions" << endl;
+        cout << "\nQUICK QUIZ - 3 Questions" << endl;
         cout << "Let's test your knowledge!" << endl;
         cout << "Press Enter to start...";
         cin.ignore();
@@ -587,21 +587,21 @@ public:
             
             if (answer == 'y' || answer == 'Y') {
                 score++;
-                cout << "✅ Correct confidence!" << endl;
+                cout << "Correct confidence!" << endl;
             } else {
-                cout << "💡 Hint: " << q.hint << endl;
+                cout << "Hint: " << q.hint << endl;
             }
         }
         
-        cout << "\n🎉 Quiz Complete!" << endl;
+        cout << "\nQuiz Complete!" << endl;
         cout << "Your confidence score: " << score << "/3" << endl;
         
         if (score == 3) {
-            cout << "🏆 Excellent! You're well prepared!" << endl;
+            cout << "Excellent! You're well prepared!" << endl;
         } else if (score == 2) {
-            cout << "👍 Good job! Keep practicing!" << endl;
+            cout << "Good job! Keep practicing!" << endl;
         } else {
-            cout << "💪 Keep studying! You'll get better!" << endl;
+            cout << "Keep studying! You'll get better!" << endl;
         }
     }
     
@@ -620,9 +620,9 @@ public:
             }
             
             file.close();
-            cout << "✅ Progress saved to 'my_progress.txt'" << endl;
+            cout << "Progress saved to 'my_progress.txt'" << endl;
         } else {
-            cout << "❌ Could not save progress" << endl;
+            cout << "Could not save progress" << endl;
         }
     }
     
@@ -657,8 +657,8 @@ public:
                     saveProgress();
                     break;
                 case 8:
-                    cout << "\n🎉 Thanks for using Simple AI Prep Bot!" << endl;
-                    cout << "Keep practicing and you'll master DSA! 💪" << endl;
+                    cout << "\nThanks for using Simple AI Prep Bot!" << endl;
+                    cout << "Keep practicing and you'll master DSA!" << endl;
                     return;
                 default:
                     cout << "Invalid choice! Please try again." << endl;
@@ -671,7 +671,7 @@ int main() {
     // Simple random seed
     srand(time(0));
     
-    cout << "🚀 Starting Simple AI Interview Prep Bot..." << endl;
+    cout << "Starting Simple AI Interview Prep Bot..." << endl;
     
     SimpleAIBot bot;
     bot.run();

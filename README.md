@@ -44,6 +44,26 @@ A comprehensive **Data Structures and Algorithms (DSA)** interview preparation t
 2. Run `simple_run.bat` and choose option 2
 3. The application will compile and run automatically
 
+### 🤖 **Optional: Enable AI Chat**
+The chatbot works with basic responses by default, but you can enhance it with Google's Gemini AI:
+
+1. **Get a free Gemini API key:**
+   - Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Sign in with your Google account
+   - Click "Create API Key"
+   - Copy the generated API key
+
+2. **Add the API key to your project:**
+   - Open `simple_interface.html` in a text editor
+   - Find line ~1427 that says: `const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY_HERE';`
+   - Replace `YOUR_GEMINI_API_KEY_HERE` with your actual API key
+   - Save the file
+
+3. **Test the AI chat:**
+   - Open the application and go to the "Chat Helper" section
+   - Ask questions like "Help me with arrays" or "Explain binary search"
+   - The bot will now provide detailed, context-aware responses!
+
 ## 📁 Project Structure
 
 ```
