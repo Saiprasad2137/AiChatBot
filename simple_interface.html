@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple AI Interview Prep Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: #74b9ff;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(116, 185, 255, 0.3);
+        }
+
+        .menu-item.active {
+            background: #74b9ff;
+            color: white;
+        }
+
+        .content-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-title {
+            font-size: 1.3em;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+
+        .question-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .difficulty-easy { background: #00b894; color: white; }
+        .difficulty-medium { background: #fdcb6e; color: #2d3436; }
+        .category-tag { background: #74b9ff; color: white; }
+
+        .button {
+            background: #74b9ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: #0984e3;
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            background: #ddd;
+            color: #333;
+        }
+
+        .button-secondary:hover {
+            background: #bbb;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00b894, #74b9ff);
+            transition: width 0.5s ease;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #74b9ff;
+        }
+
+        .stat-label {
+            color: #636e72;
+            font-size: 0.9em;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            background: white;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #74b9ff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .chat-area {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #e9ecef;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .chat-bot {
+            background: #74b9ff;
+            color: white;
+            margin-right: 20%;
+        }
+
+        .chat-user {
+            background: #e9ecef;
+            color: #2d3436;
+            margin-left: 20%;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: #74b9ff;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            border-left: 4px solid #74b9ff;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        @media (max-width: 600px) {
+            .menu {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Interview Prep Bot - Expanded Edition</h1>
+            <p>Master DSA Concepts: Arrays, Strings, Sorting, Trees, Graphs, Queues, LinkedLists & More!</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="menu">
+                <div class="menu-item active" onclick="showSection('home')">
+                    🏠 Home
+                </div>
+                <div class="menu-item" onclick="showSection('practice')">
+                    📝 Practice Questions
+                </div>
+                <div class="menu-item" onclick="showSection('progress')">
+                    📊 My Progress
+                </div>
+                <div class="menu-item" onclick="showSection('chat')">
+                    💬 Chat Helper
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <!-- Home Section -->
+                <div id="home-section">
+                    <h2>Welcome to Comprehensive DSA Learning! 🎯</h2>
+                    <p>Start your journey with essential Data Structures and Algorithms concepts covering all major topics!</p>
+                    
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-questions">43</div>
+                            <div class="stat-label">Total Questions</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="solved-questions">0</div>
+                            <div class="stat-label">Solved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="current-streak">0</div>
+                            <div class="stat-label">Streak</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="button" onclick="getRandomQuestion()">🎲 Random Question</button>
+                        <button class="button" onclick="showSection('practice')">📚 Browse Questions</button>
+                    </div>
+                </div>
+                
+                <!-- Practice Section -->
+                <div id="practice-section" class="hidden">
+                    <h2>📝 Practice Questions</h2>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <button class="button" onclick="filterQuestions('all')">All Questions</button>
+                        <button class="button" onclick="filterQuestions('Easy')">🟢 Easy</button>
+                        <button class="button" onclick="filterQuestions('Medium')">🟡 Medium</button>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <button class="button-secondary" onclick="filterQuestions('Array')">📊 Array</button>
+                        <button class="button-secondary" onclick="filterQuestions('String')">📝 String</button>
+                        <button class="button-secondary" onclick="filterQuestions('Search')">🔍 Search</button>
+                        <button class="button-secondary" onclick="filterQuestions('Sorting')">🔄 Sorting</button>
+                        <button class="button-secondary" onclick="filterQuestions('Stack')">📚 Stack</button>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <button class="button-secondary" onclick="filterQuestions('Queue')">🚢 Queue</button>
+                        <button class="button-secondary" onclick="filterQuestions('Tree')">🌳 Tree</button>
+                        <button class="button-secondary" onclick="filterQuestions('Graph')">🕸️ Graph</button>
+                        <button class="button-secondary" onclick="filterQuestions('LinkedList')">🔗 LinkedList</button>
+                        <button class="button-secondary" onclick="filterQuestions('Math')">🔢 Math</button>
+                    </div>
+                    
+                    <div id="questions-list">
+                        <!-- Questions will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Progress Section -->
+                <div id="progress-section" class="hidden">
+                    <h2>📊 My Progress</h2>
+                    
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="progress-solved">0</div>
+                            <div class="stat-label">Questions Solved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="progress-percentage">0%</div>
+                            <div class="stat-label">Progress</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="progress-streak">0</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <h3>📚 Study Tips</h3>
+                        <ul class="tips-list">
+                            <li>🎯 Start with Easy questions to build confidence</li>
+                            <li>📖 Practice one category at a time</li>
+                            <li>💡 Always try to solve before looking at hints</li>
+                            <li>⏰ Set a daily goal (like 1 question per day)</li>
+                            <li>🔄 Review your solved questions weekly</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="button" onclick="exportProgress()">📤 Export Progress</button>
+                        <button class="button-secondary" onclick="resetProgress()">🔄 Reset Progress</button>
+                    </div>
+                </div>
+                
+                <!-- Chat Section -->
+                <div id="chat-section" class="hidden">
+                    <h2>💬 Chat Helper</h2>
+                    
+                    <div class="chat-area" id="chat-messages">
+                        <div class="chat-message chat-bot">
+                            <strong>🤖 Bot:</strong> Hi! I'm here to help you learn DSA. Ask me about any topic or request a specific type of question!
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="chat-input" placeholder="Ask me about DSA concepts or request questions..." onkeypress="handleChatInput(event)">
+                        <button class="button" onclick="sendChatMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for detailed solutions -->
+    <div id="solution-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Solution</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div id="modal-body">
+                <!-- Solution content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple Questions Database
+        const questions = [
+            {
+                id: 1,
+                title: "Find Maximum in Array",
+                description: "Find the largest number in an array of integers.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Use a simple loop to compare each element with current maximum.",
+                solution: "Keep track of max value while iterating through array.",
+                code: `int findMaximum(int arr[], int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}`
+            },
+            {
+                id: 2,
+                title: "Find Minimum in Array",
+                description: "Find the smallest number in an array of integers.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Similar to finding maximum, but compare for minimum value.",
+                solution: "Initialize min with first element, then compare with rest.",
+                code: `int findMinimum(int arr[], int n) {
+    int min = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}`
+            },
+            {
+                id: 3,
+                title: "Sum of Array Elements",
+                description: "Calculate the sum of all elements in an array.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Use a loop to add each element to a sum variable.",
+                solution: "Initialize sum = 0, then add each array element to sum.",
+                code: `int sumArray(int arr[], int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}`
+            },
+            {
+                id: 4,
+                title: "Count Even Numbers",
+                description: "Count how many even numbers are in an array.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Use modulo operator (%) to check if number is even.",
+                solution: "Loop through array, if num % 2 == 0, increment counter.",
+                code: `int countEven(int arr[], int n) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] % 2 == 0) {
+            count++;
+        }
+    }
+    return count;
+}`
+            },
+            {
+                id: 5,
+                title: "Reverse Array",
+                description: "Reverse the order of elements in an array.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Use two pointers from start and end, swap elements.",
+                solution: "Swap elements at positions i and n-1-i for i from 0 to n/2.",
+                code: `void reverseArray(int arr[], int n) {
+    int start = 0, end = n - 1;
+    while (start < end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}`
+            },
+            {
+                id: 6,
+                title: "Count Vowels",
+                description: "Count the number of vowels in a string.",
+                difficulty: "Easy",
+                category: "String",
+                hint: "Check each character if it's a vowel (a,e,i,o,u).",
+                solution: "Loop through string, check if each char is in 'aeiouAEIOU'.",
+                code: `int countVowels(string str) {
+    int count = 0;
+    string vowels = "aeiouAEIOU";
+    for (char c : str) {
+        if (vowels.find(c) != string::npos) {
+            count++;
+        }
+    }
+    return count;
+}`
+            },
+            {
+                id: 7,
+                title: "Reverse String",
+                description: "Reverse a string using simple method.",
+                difficulty: "Easy",
+                category: "String",
+                hint: "Use two pointers or built-in reverse function.",
+                solution: "Swap characters from start and end moving towards center.",
+                code: `string reverseString(string str) {
+    int start = 0, end = str.length() - 1;
+    while (start < end) {
+        swap(str[start], str[end]);
+        start++;
+        end--;
+    }
+    return str;
+}`
+            },
+            {
+                id: 8,
+                title: "Check Palindrome",
+                description: "Check if a string reads the same forwards and backwards.",
+                difficulty: "Easy",
+                category: "String",
+                hint: "Compare string with its reverse.",
+                solution: "Compare characters from both ends moving towards center.",
+                code: `bool isPalindrome(string str) {
+    int start = 0, end = str.length() - 1;
+    while (start < end) {
+        if (str[start] != str[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}`
+            },
+            {
+                id: 9,
+                title: "Linear Search",
+                description: "Find if an element exists in an array using linear search.",
+                difficulty: "Easy",
+                category: "Search",
+                hint: "Check each element one by one until you find the target.",
+                solution: "Loop through array, return index if element found, -1 if not.",
+                code: `int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) {
+            return i;  // Return index
+        }
+    }
+    return -1;  // Not found
+}`
+            },
+            {
+                id: 10,
+                title: "Binary Search",
+                description: "Find an element in a sorted array using binary search.",
+                difficulty: "Medium",
+                category: "Search",
+                hint: "Compare with middle element and eliminate half of the array.",
+                solution: "Compare target with middle, go left if smaller, right if larger.",
+                code: `int binarySearch(int arr[], int n, int target) {
+    int left = 0, right = n - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        }
+        if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}`
+            },
+            {
+                id: 11,
+                title: "Bubble Sort",
+                description: "Sort an array using bubble sort algorithm.",
+                difficulty: "Medium",
+                category: "Sorting",
+                hint: "Compare adjacent elements and swap if they're in wrong order.",
+                solution: "Repeatedly pass through array, swapping adjacent wrong pairs.",
+                code: `void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}`
+            },
+            {
+                id: 12,
+                title: "Selection Sort",
+                description: "Sort an array using selection sort algorithm.",
+                difficulty: "Medium",
+                category: "Sorting",
+                hint: "Find minimum element and place it at the beginning.",
+                solution: "Find min element, swap with first, repeat for remaining array.",
+                code: `void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);
+    }
+}`
+            },
+            {
+                id: 13,
+                title: "Balanced Parentheses",
+                description: "Check if parentheses in a string are balanced.",
+                difficulty: "Medium",
+                category: "Stack",
+                hint: "Use stack to keep track of opening brackets.",
+                solution: "Push opening brackets, pop for closing, check if stack is empty.",
+                code: `bool isBalanced(string str) {
+    stack<char> s;
+    for (char c : str) {
+        if (c == '(' || c == '[' || c == '{') {
+            s.push(c);
+        } else if (c == ')' || c == ']' || c == '}') {
+            if (s.empty()) return false;
+            char top = s.top();
+            s.pop();
+            if ((c == ')' && top != '(') ||
+                (c == ']' && top != '[') ||
+                (c == '}' && top != '{')) {
+                return false;
+            }
+        }
+    }
+    return s.empty();
+}`
+            },
+            {
+                id: 14,
+                title: "Implement Queue using Array",
+                description: "Implement a simple queue using array.",
+                difficulty: "Medium",
+                category: "Queue",
+                hint: "Use front and rear pointers to track queue positions.",
+                solution: "Maintain front and rear indices, enqueue at rear, dequeue from front."
+            },
+            {
+                id: 15,
+                title: "Insertion Sort",
+                description: "Sort an array using insertion sort algorithm.",
+                difficulty: "Medium",
+                category: "Sorting",
+                hint: "Insert each element into its correct position in sorted portion.",
+                solution: "Take each element and insert it in correct position in sorted part."
+            },
+            {
+                id: 16,
+                title: "Merge Sort",
+                description: "Sort an array using merge sort algorithm.",
+                difficulty: "Medium",
+                category: "Sorting",
+                hint: "Divide array into halves, sort each half, then merge.",
+                solution: "Recursively divide array, then merge sorted halves."
+            },
+            {
+                id: 17,
+                title: "Quick Sort",
+                description: "Sort an array using quick sort algorithm.",
+                difficulty: "Medium",
+                category: "Sorting",
+                hint: "Choose pivot, partition array, recursively sort partitions.",
+                solution: "Pick pivot, partition around it, recursively sort both parts."
+            },
+            {
+                id: 18,
+                title: "Binary Tree Traversal",
+                description: "Traverse a binary tree in inorder, preorder, postorder.",
+                difficulty: "Medium",
+                category: "Tree",
+                hint: "Use recursion to visit nodes in different orders.",
+                solution: "Inorder: left-root-right, Preorder: root-left-right, Postorder: left-right-root.",
+                code: `struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+void inorderTraversal(TreeNode* root) {
+    if (root == nullptr) return;
+    inorderTraversal(root->left);
+    cout << root->val << " ";
+    inorderTraversal(root->right);
+}
+
+void preorderTraversal(TreeNode* root) {
+    if (root == nullptr) return;
+    cout << root->val << " ";
+    preorderTraversal(root->left);
+    preorderTraversal(root->right);
+}
+
+void postorderTraversal(TreeNode* root) {
+    if (root == nullptr) return;
+    postorderTraversal(root->left);
+    postorderTraversal(root->right);
+    cout << root->val << " ";
+}`
+            },
+            {
+                id: 19,
+                title: "Find Maximum in Binary Tree",
+                description: "Find the maximum value in a binary tree.",
+                difficulty: "Easy",
+                category: "Tree",
+                hint: "Use recursion to compare values in left and right subtrees.",
+                solution: "Recursively find max in left and right subtrees, compare with root."
+            },
+            {
+                id: 20,
+                title: "Binary Search Tree Insert",
+                description: "Insert a node into a binary search tree.",
+                difficulty: "Medium",
+                category: "Tree",
+                hint: "Compare with root, go left if smaller, right if larger.",
+                solution: "If value < root, go left; if value > root, go right; insert at null."
+            },
+            {
+                id: 21,
+                title: "Check if Binary Tree is BST",
+                description: "Check if a binary tree is a valid binary search tree.",
+                difficulty: "Medium",
+                category: "Tree",
+                hint: "Use inorder traversal or check min/max constraints.",
+                solution: "Inorder traversal of BST should give sorted sequence."
+            },
+            {
+                id: 22,
+                title: "Graph Representation",
+                description: "Represent a graph using adjacency list or matrix.",
+                difficulty: "Easy",
+                category: "Graph",
+                hint: "Use array of lists for adjacency list, 2D array for matrix.",
+                solution: "Adjacency list: vector<vector<int>>, Matrix: int[n][n]."
+            },
+            {
+                id: 23,
+                title: "BFS Traversal",
+                description: "Implement breadth-first search traversal of a graph.",
+                difficulty: "Medium",
+                category: "Graph",
+                hint: "Use queue to visit nodes level by level.",
+                solution: "Use queue: add start node, visit neighbors, mark visited.",
+                code: `void BFS(vector<vector<int>>& graph, int start) {
+    vector<bool> visited(graph.size(), false);
+    queue<int> q;
+    
+    visited[start] = true;
+    q.push(start);
+    
+    while (!q.empty()) {
+        int vertex = q.front();
+        q.pop();
+        cout << vertex << " ";
+        
+        for (int neighbor : graph[vertex]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}`
+            },
+            {
+                id: 24,
+                title: "DFS Traversal",
+                description: "Implement depth-first search traversal of a graph.",
+                difficulty: "Medium",
+                category: "Graph",
+                hint: "Use stack or recursion to visit nodes depth-wise.",
+                solution: "Use stack/recursion: visit node, mark visited, visit neighbors.",
+                code: `void DFS(vector<vector<int>>& graph, int start, vector<bool>& visited) {
+    visited[start] = true;
+    cout << start << " ";
+    
+    for (int neighbor : graph[start]) {
+        if (!visited[neighbor]) {
+            DFS(graph, neighbor, visited);
+        }
+    }
+}
+
+// Using stack (iterative)
+void DFS_iterative(vector<vector<int>>& graph, int start) {
+    vector<bool> visited(graph.size(), false);
+    stack<int> s;
+    
+    s.push(start);
+    
+    while (!s.empty()) {
+        int vertex = s.top();
+        s.pop();
+        
+        if (!visited[vertex]) {
+            visited[vertex] = true;
+            cout << vertex << " ";
+            
+            for (int neighbor : graph[vertex]) {
+                if (!visited[neighbor]) {
+                    s.push(neighbor);
+                }
+            }
+        }
+    }
+}`
+            },
+            {
+                id: 25,
+                title: "Find Path in Graph",
+                description: "Find if a path exists between two nodes in a graph.",
+                difficulty: "Medium",
+                category: "Graph",
+                hint: "Use BFS or DFS to search for target node.",
+                solution: "Start BFS/DFS from source, check if we reach target."
+            },
+            {
+                id: 26,
+                title: "Implement Queue using Stacks",
+                description: "Implement a queue using two stacks.",
+                difficulty: "Medium",
+                category: "Queue",
+                hint: "Use one stack for enqueue, another for dequeue operations.",
+                solution: "Use stack1 for enqueue, stack2 for dequeue, transfer when needed."
+            },
+            {
+                id: 27,
+                title: "Circular Queue",
+                description: "Implement a circular queue using array.",
+                difficulty: "Medium",
+                category: "Queue",
+                hint: "Use modulo operation to wrap around the array.",
+                solution: "Use (rear + 1) % size for circular increment."
+            },
+            {
+                id: 28,
+                title: "Queue using Linked List",
+                description: "Implement a queue using linked list.",
+                difficulty: "Medium",
+                category: "Queue",
+                hint: "Use front and rear pointers to linked list nodes.",
+                solution: "Enqueue at rear, dequeue from front, update pointers."
+            },
+            {
+                id: 29,
+                title: "Insert Node in Linked List",
+                description: "Insert a node at the beginning, middle, or end of linked list.",
+                difficulty: "Easy",
+                category: "LinkedList",
+                hint: "Create new node, adjust pointers accordingly.",
+                solution: "At beginning: new->next = head; head = new. At end: traverse and link."
+            },
+            {
+                id: 30,
+                title: "Delete Node from Linked List",
+                description: "Delete a node from linked list given its value.",
+                difficulty: "Easy",
+                category: "LinkedList",
+                hint: "Find the node, adjust previous node's next pointer.",
+                solution: "Find node, set prev->next = node->next, delete node."
+            },
+            {
+                id: 31,
+                title: "Reverse Linked List",
+                description: "Reverse a singly linked list.",
+                difficulty: "Medium",
+                category: "LinkedList",
+                hint: "Use three pointers: prev, current, next.",
+                solution: "Iterate: save next, reverse link, move pointers forward.",
+                code: `struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* current = head;
+    ListNode* next = nullptr;
+    
+    while (current != nullptr) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev;
+}`
+            },
+            {
+                id: 32,
+                title: "Find Middle of Linked List",
+                description: "Find the middle node of a linked list.",
+                difficulty: "Easy",
+                category: "LinkedList",
+                hint: "Use slow and fast pointers (tortoise and hare).",
+                solution: "Slow moves 1 step, fast moves 2 steps. When fast reaches end, slow is at middle."
+            },
+            {
+                id: 33,
+                title: "Detect Cycle in Linked List",
+                description: "Check if a linked list has a cycle.",
+                difficulty: "Medium",
+                category: "LinkedList",
+                hint: "Use Floyd's algorithm with slow and fast pointers.",
+                solution: "If fast and slow pointers meet, there's a cycle."
+            },
+            {
+                id: 34,
+                title: "Merge Two Sorted Linked Lists",
+                description: "Merge two sorted linked lists into one sorted list.",
+                difficulty: "Medium",
+                category: "LinkedList",
+                hint: "Compare heads, take smaller, advance that pointer.",
+                solution: "Use dummy node, compare values, link smaller node, advance."
+            },
+            {
+                id: 35,
+                title: "Fibonacci Numbers",
+                description: "Generate first n Fibonacci numbers.",
+                difficulty: "Easy",
+                category: "Math",
+                hint: "Each number is sum of previous two numbers.",
+                solution: "Start with 0,1 then each next number is sum of previous two.",
+                code: `// Generate first n Fibonacci numbers
+vector<int> fibonacci(int n) {
+    if (n <= 0) return {};
+    if (n == 1) return {0};
+    
+    vector<int> fib = {0, 1};
+    for (int i = 2; i < n; i++) {
+        fib.push_back(fib[i-1] + fib[i-2]);
+    }
+    return fib;
+}
+
+// Get nth Fibonacci number (recursive)
+int fibRecursive(int n) {
+    if (n <= 1) return n;
+    return fibRecursive(n-1) + fibRecursive(n-2);
+}
+
+// Get nth Fibonacci number (iterative)
+int fibIterative(int n) {
+    if (n <= 1) return n;
+    int a = 0, b = 1, c;
+    for (int i = 2; i <= n; i++) {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}`
+            },
+            {
+                id: 36,
+                title: "Prime Number Check",
+                description: "Check if a given number is prime.",
+                difficulty: "Easy",
+                category: "Math",
+                hint: "Check if number has any divisors from 2 to sqrt(n).",
+                solution: "Loop from 2 to sqrt(n), if any number divides n, it's not prime."
+            },
+            {
+                id: 37,
+                title: "GCD of Two Numbers",
+                description: "Find Greatest Common Divisor of two numbers.",
+                difficulty: "Easy",
+                category: "Math",
+                hint: "Use Euclidean algorithm: gcd(a,b) = gcd(b, a%b).",
+                solution: "Keep dividing larger by smaller until remainder is 0."
+            },
+            {
+                id: 38,
+                title: "Two Sum Problem",
+                description: "Find two numbers in array that add up to target.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Use nested loops or hash map for O(n) solution.",
+                solution: "For each element, check if (target - element) exists in array.",
+                code: `// Brute Force - O(n²)
+vector<int> twoSum(vector<int>& nums, int target) {
+    for (int i = 0; i < nums.size(); i++) {
+        for (int j = i + 1; j < nums.size(); j++) {
+            if (nums[i] + nums[j] == target) {
+                return {i, j};
+            }
+        }
+    }
+    return {};
+}
+
+// Hash Map - O(n)
+vector<int> twoSumOptimal(vector<int>& nums, int target) {
+    unordered_map<int, int> map;
+    for (int i = 0; i < nums.size(); i++) {
+        int complement = target - nums[i];
+        if (map.find(complement) != map.end()) {
+            return {map[complement], i};
+        }
+        map[nums[i]] = i;
+    }
+    return {};
+}`
+            },
+            {
+                id: 39,
+                title: "Remove Duplicates",
+                description: "Remove duplicate elements from sorted array.",
+                difficulty: "Easy",
+                category: "Array",
+                hint: "Use two pointers to track unique elements.",
+                solution: "Keep one pointer for unique position, another for traversal."
+            },
+            {
+                id: 40,
+                title: "Anagram Check",
+                description: "Check if two strings are anagrams of each other.",
+                difficulty: "Easy",
+                category: "String",
+                hint: "Sort both strings and compare, or count character frequency.",
+                solution: "Two strings are anagrams if they have same character frequencies."
+            },
+            {
+                id: 41,
+                title: "Longest Common Substring",
+                description: "Find the longest common substring between two strings.",
+                difficulty: "Medium",
+                category: "String",
+                hint: "Use dynamic programming or sliding window approach.",
+                solution: "Build a 2D table to track matching characters."
+            },
+            {
+                id: 42,
+                title: "Valid Parentheses",
+                description: "Check if string has valid parentheses (), [], {}.",
+                difficulty: "Easy",
+                category: "Stack",
+                hint: "Use stack to match opening and closing brackets.",
+                solution: "Push opening brackets, for closing brackets check if stack top matches."
+            },
+            {
+                id: 43,
+                title: "Next Greater Element",
+                description: "Find next greater element for each element in array.",
+                difficulty: "Medium",
+                category: "Stack",
+                hint: "Use stack to keep track of elements waiting for next greater.",
+                solution: "Push elements to stack, pop when we find a greater element."
+            }
+        ];
+
+        // Simple user progress
+        let userProgress = {
+            totalQuestions: questions.length,
+            solvedQuestions: 0,
+            currentStreak: 0,
+            solvedIds: []
+        };
+
+        // Load saved progress
+        function loadProgress() {
+            const saved = localStorage.getItem('simplePrep');
+            if (saved) {
+                userProgress = JSON.parse(saved);
+            }
+            updateProgressDisplay();
+        }
+
+        // Save progress
+        function saveProgress() {
+            localStorage.setItem('simplePrep', JSON.stringify(userProgress));
+        }
+
+        // Update progress display
+        function updateProgressDisplay() {
+            document.getElementById('total-questions').textContent = userProgress.totalQuestions;
+            document.getElementById('solved-questions').textContent = userProgress.solvedQuestions;
+            document.getElementById('current-streak').textContent = userProgress.currentStreak;
+            document.getElementById('progress-solved').textContent = userProgress.solvedQuestions;
+            document.getElementById('progress-streak').textContent = userProgress.currentStreak;
+            
+            const percentage = Math.round((userProgress.solvedQuestions / userProgress.totalQuestions) * 100);
+            document.getElementById('progress-percentage').textContent = percentage + '%';
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+
+        // Show section
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('#home-section, #practice-section, #progress-section, #chat-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(section + '-section').classList.remove('hidden');
+            
+            // Update menu active state
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load section content
+            if (section === 'practice') {
+                loadQuestions();
+            } else if (section === 'progress') {
+                updateProgressDisplay();
+            }
+        }
+
+        // Load questions
+        function loadQuestions() {
+            const container = document.getElementById('questions-list');
+            container.innerHTML = '';
+            
+            questions.forEach(question => {
+                const questionCard = createQuestionCard(question);
+                container.appendChild(questionCard);
+            });
+        }
+
+        // Create question card
+        function createQuestionCard(question) {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            
+            const difficultyClass = question.difficulty === 'Easy' ? 'difficulty-easy' : 'difficulty-medium';
+            const isSolved = userProgress.solvedIds.includes(question.id);
+            
+            card.innerHTML = `
+                <div class="question-title">${question.title} ${isSolved ? '✅' : ''}</div>
+                <div class="question-meta">
+                    <span class="tag ${difficultyClass}">${question.difficulty}</span>
+                    <span class="tag category-tag">${question.category}</span>
+                </div>
+                <div style="margin-bottom: 15px; color: #636e72;">${question.description}</div>
+                <div>
+                    <button class="button" onclick="viewQuestion(${question.id})">👁️ View</button>
+                    <button class="button" onclick="showHint(${question.id})">💡 Hint</button>
+                    <button class="button" onclick="showSolution(${question.id})">� Code Solution</button>
+                    <button class="button" onclick="markSolved(${question.id})">✅ Mark Solved</button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Filter questions
+        function filterQuestions(filter) {
+            const container = document.getElementById('questions-list');
+            container.innerHTML = '';
+            
+            let filtered = questions;
+            if (filter !== 'all') {
+                filtered = questions.filter(q => q.difficulty === filter || q.category === filter);
+            }
+            
+            filtered.forEach(question => {
+                const questionCard = createQuestionCard(question);
+                container.appendChild(questionCard);
+            });
+        }
+
+        // Get random question
+        function getRandomQuestion() {
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            const question = questions[randomIndex];
+            viewQuestion(question.id);
+        }
+
+        // View question
+        function viewQuestion(id) {
+            const question = questions.find(q => q.id === id);
+            if (!question) return;
+            
+            alert(`📝 ${question.title}\n\n${question.description}\n\nDifficulty: ${question.difficulty}\nCategory: ${question.category}`);
+        }
+
+        // Show hint
+        function showHint(id) {
+            const question = questions.find(q => q.id === id);
+            if (!question) return;
+            
+            alert(`💡 Hint for "${question.title}":\n\n${question.hint}`);
+        }
+
+        // Show solution
+        function showSolution(id) {
+            const question = questions.find(q => q.id === id);
+            if (!question) return;
+            
+            // Open modal with solution
+            const modal = document.getElementById('solution-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            
+            modalTitle.textContent = `Solution: ${question.title}`;
+            
+            let content = `
+                <div class="question-meta">
+                    <span class="tag ${question.difficulty === 'Easy' ? 'difficulty-easy' : 'difficulty-medium'}">${question.difficulty}</span>
+                    <span class="tag category-tag">${question.category}</span>
+                </div>
+                <p><strong>Problem:</strong> ${question.description}</p>
+                <p><strong>Approach:</strong> ${question.solution}</p>
+            `;
+            
+            if (question.code) {
+                content += `
+                    <h3>💻 Code Implementation:</h3>
+                    <div class="code-block">
+                        <pre>${question.code}</pre>
+                    </div>
+                `;
+            }
+            
+            // Add complexity analysis for some algorithms
+            if (question.category === 'Sorting') {
+                content += `
+                    <h3>⚡ Complexity Analysis:</h3>
+                    <p><strong>Time Complexity:</strong> ${getTimeComplexity(question.title)}</p>
+                    <p><strong>Space Complexity:</strong> ${getSpaceComplexity(question.title)}</p>
+                `;
+            }
+            
+            modalBody.innerHTML = content;
+            modal.style.display = 'block';
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('solution-modal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('solution-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Get time complexity for algorithms
+        function getTimeComplexity(title) {
+            const complexities = {
+                'Bubble Sort': 'O(n²)',
+                'Selection Sort': 'O(n²)',
+                'Insertion Sort': 'O(n²)',
+                'Merge Sort': 'O(n log n)',
+                'Quick Sort': 'O(n log n) average, O(n²) worst',
+                'Binary Search': 'O(log n)',
+                'Linear Search': 'O(n)',
+                'BFS Traversal': 'O(V + E)',
+                'DFS Traversal': 'O(V + E)'
+            };
+            return complexities[title] || 'O(n)';
+        }
+        
+        // Get space complexity for algorithms
+        function getSpaceComplexity(title) {
+            const complexities = {
+                'Bubble Sort': 'O(1)',
+                'Selection Sort': 'O(1)',
+                'Insertion Sort': 'O(1)',
+                'Merge Sort': 'O(n)',
+                'Quick Sort': 'O(log n)',
+                'Binary Search': 'O(1)',
+                'Linear Search': 'O(1)',
+                'BFS Traversal': 'O(V)',
+                'DFS Traversal': 'O(V)'
+            };
+            return complexities[title] || 'O(1)';
+        }
+
+        // Mark as solved
+        function markSolved(id) {
+            if (!userProgress.solvedIds.includes(id)) {
+                userProgress.solvedIds.push(id);
+                userProgress.solvedQuestions++;
+                userProgress.currentStreak++;
+                saveProgress();
+                updateProgressDisplay();
+                
+                // Refresh the current view
+                if (!document.getElementById('practice-section').classList.contains('hidden')) {
+                    loadQuestions();
+                }
+                
+                // Show encouragement
+                const messages = [
+                    "🎉 Great job! Keep going!",
+                    "💪 You're getting stronger!",
+                    "⭐ Excellent progress!",
+                    "🚀 You're on fire!"
+                ];
+                
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                alert(randomMessage);
+            }
+        }
+
+        // Export progress
+        function exportProgress() {
+            const data = {
+                timestamp: new Date().toISOString(),
+                progress: userProgress
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dsa-progress.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset your progress?')) {
+                userProgress = {
+                    totalQuestions: questions.length,
+                    solvedQuestions: 0,
+                    currentStreak: 0,
+                    solvedIds: []
+                };
+                saveProgress();
+                updateProgressDisplay();
+                alert('Progress reset successfully!');
+            }
+        }
+
+        // Chat functionality
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            // Add user message
+            addChatMessage('user', message);
+            input.value = '';
+            
+            // Generate bot response
+            setTimeout(() => {
+                const response = generateBotResponse(message);
+                addChatMessage('bot', response);
+            }, 500);
+        }
+
+        function addChatMessage(sender, message) {
+            const messagesDiv = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message chat-${sender}`;
+            
+            const senderLabel = sender === 'bot' ? '🤖 Bot:' : '👤 You:';
+            messageDiv.innerHTML = `<strong>${senderLabel}</strong> ${message}`;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function generateBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('array')) {
+                return "Arrays are fundamental! Try these questions: Find Maximum, Sum Elements, Two Sum Problem, or Remove Duplicates. Start with easy ones!";
+            } else if (lowerMessage.includes('string')) {
+                return "Strings are important! Practice: Count Vowels, Reverse String, Check Palindrome, or Anagram Check. These build good foundations!";
+            } else if (lowerMessage.includes('search')) {
+                return "Searching is key! Start with Linear Search (easy), then try Binary Search (medium). Understanding these helps a lot!";
+            } else if (lowerMessage.includes('sort')) {
+                return "Sorting algorithms are crucial! Try Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, or Quick Sort. Start with bubble sort!";
+            } else if (lowerMessage.includes('tree')) {
+                return "Trees are powerful! Try: Find Maximum in Binary Tree (easy), then Binary Tree Traversal and BST Insert (medium). Great for recursion practice!";
+            } else if (lowerMessage.includes('graph')) {
+                return "Graphs are everywhere! Start with Graph Representation (easy), then try BFS/DFS Traversal (medium). Essential for many algorithms!";
+            } else if (lowerMessage.includes('queue')) {
+                return "Queues are FIFO! Try: Implement Queue using Array, Queue using Stacks, or Circular Queue. Great for BFS and level-order traversals!";
+            } else if (lowerMessage.includes('linkedlist') || lowerMessage.includes('linked list')) {
+                return "Linked Lists are fundamental! Try: Insert/Delete Node (easy), then Reverse Linked List, Find Middle, or Detect Cycle (medium)!";
+            } else if (lowerMessage.includes('stack')) {
+                return "Stacks are LIFO! Try: Balanced Parentheses, Valid Parentheses (easy), or Next Greater Element (medium). Great for expression evaluation!";
+            } else if (lowerMessage.includes('math')) {
+                return "Math problems are fun! Try: Fibonacci Numbers, Prime Number Check, or GCD (easy). These build logical thinking!";
+            } else if (lowerMessage.includes('help')) {
+                return "I can help you with DSA topics! Ask me about arrays, strings, searching, sorting, trees, graphs, queues, linked lists, stacks, or math!";
+            } else if (lowerMessage.includes('progress')) {
+                return `You've solved ${userProgress.solvedQuestions}/${userProgress.totalQuestions} questions! Your streak is ${userProgress.currentStreak}. Keep going! 🚀`;
+            } else if (lowerMessage.includes('easy')) {
+                return "Easy questions are perfect to start! Try: Find Maximum, Count Vowels, Linear Search, Insert Node, or Prime Check. Build confidence first!";
+            } else if (lowerMessage.includes('medium')) {
+                return "Medium questions challenge you more! Try: Binary Search, Merge Sort, Tree Traversal, BFS/DFS, or Reverse Linked List. You've got this!";
+            } else {
+                return "I'm here to help you learn DSA! Ask me about specific topics like arrays, strings, trees, graphs, queues, linked lists, or sorting. What interests you?";
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            loadQuestions();
+        });
+    </script>
+</body>
+</html>
